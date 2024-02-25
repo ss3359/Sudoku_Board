@@ -12,6 +12,7 @@
 #include <random>
 #include "PartTwoWork.hpp"
 #include "Sudoku.hpp"
+#include "MoreCoding.hpp"
 
 using namespace std;
 
@@ -21,20 +22,30 @@ int main() {
     //Variables Involved
     Sudoku s;
     int grid[9][9] = {{1,0,0,0,3,5,0,6},
-                    {0,0,0,0,0,0,8,0,7},
-                    {0,5,0,6,0,0,0,0,0},
-                    {0,0,6,0,0,7,0,0,8},
-                    {0,0,8,0,6,0,2,0,0},
-        {4,0,0,9,0,0,6,0,0}, {0,0,0,0,0,4,0,2,0}, {2,0,4,0,0,0,0,0,0},{9,0,7,5,0,0,0,0,3}};
+                      {0,0,0,0,0,0,8,0,7},
+                      {0,5,0,6,0,0,0,0,0},
+                      {0,0,6,0,0,7,0,0,8},
+                      {0,0,8,0,6,0,2,0,0},
+                      {4,0,0,9,0,0,6,0,0},
+                      {0,0,0,0,0,4,0,2,0},
+                      {2,0,4,0,0,0,0,0,0},
+                      {9,0,7,5,0,0,0,0,3}};
 
     //Start The Game
+    cout<<"Initial Board: \n\n";
     s.PrintBoard(grid);
     cout<<"\n\n";
    //Solve The Sudoku Puzzle
-   
-    if(s.SolveTheBoard(grid)){
-        cout<<"Solved Sudoku Board!"<<endl;
+    bool result=s.SolveTheBoard(grid);
+    
+    if(result){
+        cout<<"Sudoku Puzzle Solved: \n\n"<<endl;
     }
+    else{
+        cout<<"No Valid Solution! "<<endl; 
+    }
+    
+    s.PrintBoard(grid); 
 
     return 0;
 }

@@ -49,7 +49,7 @@ bool Sudoku::IsInBox(int number, int grid[9][9], int RowNumber, int ColumnNumber
 bool Sudoku::PrintNumberOnGrid(int number, int grid[9][9], int RowNumber, int ColumnNumber){
     
     bool result1 = IsInRow(number, grid, RowNumber), result2=IsInColumn(number, grid, ColumnNumber), result3= IsInBox(number, grid, RowNumber, ColumnNumber);
-    return !(result1)&&!(result2)&&!(result3);
+    return !(result1)&& !(result2)&&!(result3);
 }
 
 void Sudoku::PrintBoard(int grid[9][9]){
@@ -66,27 +66,26 @@ void Sudoku::PrintBoard(int grid[9][9]){
 
 
 bool Sudoku::SolveTheBoard(int grid[9][9]){
-    bool result=false;
     for(int i=0; i<9; i++){
         for(int j=0; j<9; j++){
-            
             if(grid[i][j]==0){
                 for(int m=1; m<=9; m++){
                     if(PrintNumberOnGrid(m, grid, i, j)){
                         grid[i][j]=m;
                         
-                        if(SolveTheBoard(grid)){
-                            result=true;
-                            PrintBoard(grid);
+                        if(SolveTheBoard(grid)==true){
+                            return true;
                         }
                         else{
-                            grid[i][j]=0;
+                            grid[i][j]=0; 
                         }
                     }
                 }
+                
+                return false; 
             }
         }
     }
-    return result;
+    return true;
 }
 
