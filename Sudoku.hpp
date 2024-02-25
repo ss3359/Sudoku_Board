@@ -28,8 +28,8 @@ public:
     bool IsInColumn(int number, int grid[9][9], int FixedColumnNumber);
     bool IsInBox(int number, int grid[9][9], int RowNumber, int ColumnNumber);
     bool PrintNumberOnGrid(int number, int grid[9][9], int RowNumber, int ColumnNumber);
-    void CreateSudokuBoard(int grid[9][9], int numbers[9]);
-//    void StartThePuzzle(int grid[9][9], int number);
+    void PrintBoard(int grid[9][9]);
+    bool SolveTheBoard(int grid[9][9]);
 };
 
 #endif /* Sudoku_hpp */

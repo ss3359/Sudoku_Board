@@ -48,22 +48,12 @@ bool Sudoku::IsInBox(int number, int grid[9][9], int RowNumber, int ColumnNumber
 
 bool Sudoku::PrintNumberOnGrid(int number, int grid[9][9], int RowNumber, int ColumnNumber){
     
-    bool result1 = IsInRow(number, grid, RowNumber), result2=IsInColumn(number, grid, ColumnNumber), result3=IsInBox(number, grid, RowNumber, ColumnNumber);
-    return result1&&result2&&result3;
+    bool result1 = IsInRow(number, grid, RowNumber), result2=IsInColumn(number, grid, ColumnNumber), result3= IsInBox(number, grid, RowNumber, ColumnNumber);
+    return !(result1)&&!(result2)&&!(result3);
 }
 
-void Sudoku::CreateSudokuBoard(int grid[9][9], int numbers[9]){
-    int RandNum;
-    for(int i=0; i<9; i++){
-        for(int j=0; j<9; j++){
-            RandNum=rand()%9;
-            if((i%9==1 && j%9==6)|| (i%9==2 && j%9==5))
-                grid[i][j]=numbers[RandNum];
-            else
-                grid[i][j]=0;
-        }
-    }
-    
+void Sudoku::PrintBoard(int grid[9][9]){
+   
     //print the board
     for(int i=0; i<9; i++){
         for(int j=0; j<9; j++){
@@ -73,22 +63,30 @@ void Sudoku::CreateSudokuBoard(int grid[9][9], int numbers[9]){
     }
     
 }
-//void Sudoku::StartThePuzzle(int grid[9][9], int number){
-//    for(int i=0; i<9; i++){
-//        for(int j=0; j<9; j++){
-//            PrintNumberOnGrid(number, grid, i, j);
-//           }
-//        }
-//
-//    
-//    //Print the final Puzzle
-//    cout<<"\n\n";
-//    for(int i=0; i<9; i++){
-//        for(int j=0; j<9; j++){
-//            cout<<grid[i][j]<<"\t";
-//        }
-//        cout<<endl;
-//    }
-//    
-//    
-//}
+
+
+bool Sudoku::SolveTheBoard(int grid[9][9]){
+    bool result=false;
+    for(int i=0; i<9; i++){
+        for(int j=0; j<9; j++){
+            
+            if(grid[i][j]==0){
+                for(int m=1; m<=9; m++){
+                    if(PrintNumberOnGrid(m, grid, i, j)){
+                        grid[i][j]=m;
+                        
+                        if(SolveTheBoard(grid)){
+                            result=true;
+                            PrintBoard(grid);
+                        }
+                        else{
+                            grid[i][j]=0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return result;
+}
+

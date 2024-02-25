@@ -20,21 +20,22 @@ int main() {
  
     //Variables Involved
     Sudoku s;
-    int numbers[9]={1,2,3,4,5,6,7,8,9},position;
-    int grid[9][9];
+    int grid[9][9] = {{1,0,0,0,3,5,0,6},
+                    {0,0,0,0,0,0,8,0,7},
+                    {0,5,0,6,0,0,0,0,0},
+                    {0,0,6,0,0,7,0,0,8},
+                    {0,0,8,0,6,0,2,0,0},
+        {4,0,0,9,0,0,6,0,0}, {0,0,0,0,0,4,0,2,0}, {2,0,4,0,0,0,0,0,0},{9,0,7,5,0,0,0,0,3}};
 
     //Start The Game
-    s.CreateSudokuBoard(grid, numbers);
-    
+    s.PrintBoard(grid);
+    cout<<"\n\n";
    //Solve The Sudoku Puzzle
-    
-    for(int i=0; i<9; i++){
-        position=0;
-        for(int j=0; j<9; j++){
-            s.PrintNumberOnGrid(numbers[position], grid, i, j);
-        }
+   
+    if(s.SolveTheBoard(grid)){
+        cout<<"Solved Sudoku Board!"<<endl;
     }
-    
+
     return 0;
 }
 
